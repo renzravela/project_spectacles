@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MovieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/app/home', [UserController::class, 'login'])->name('user.login');
+
+// Route::resource('/movies', '\App\Http\Controllers\MovieController');
+Route::resource('/user', '\App\Http\Controllers\UserController');
