@@ -25,18 +25,32 @@ class UserController extends Controller
         $checkUser = User::where('email', $user_email)->first();
 
         if ($checkUser && Hash::check($user_password, $checkUser->password)) {
-            $movie_list = Movie::all();
+
             session(['user_id' => $checkUser->id, 'user_name' => $checkUser->first_name]);
-            return view('User.home', compact('movie_list'));
+            return redirect()->route('user.dashboard');
         }
 
         $login_response = 'Login failed! ' . (!$checkUser ? 'Email not found.' : 'Incorrect password.');
         return redirect('/user')->with('login_response', $login_response);
     }
 
+    public function logout()
+    {
+        session()->forget(['user_id', 'user_name']);
+        $movie_list = Movie::all();
+        return view('User.home', compact('movie_list'));
+    }
+
+    public function dashboard()
+    {
+        $movie_list = Movie::all();
+        return view('User.home', compact('movie_list'));
+    }
+
     public function index()
     {
         //
+
         return view('User.login_user');
     }
 

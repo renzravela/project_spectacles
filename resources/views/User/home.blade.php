@@ -9,6 +9,7 @@
 <body>
     @if (session('user_id'))
         <span>Hello, {{session('user_name')}}</span>
+        <a href="{{ route('user.logout') }}">Logout</a>
     @endif
     @if (!session('user_id'))
         <a href="{{ route('user.index') }}">Login/Register</a>
