@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
 
 class MovieController extends Controller
 {
@@ -14,6 +15,8 @@ class MovieController extends Controller
     public function index()
     {
         //
+        $movies = Movie::all();
+        return view('Movie.movie_home')->with(compact('movies'));
     }
 
     /**
@@ -24,6 +27,7 @@ class MovieController extends Controller
     public function create()
     {
         //
+        return view('Movie.movies_add');
     }
 
     /**
@@ -34,8 +38,38 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'director' => 'required',
+            'genre' => 'required',
+            'description' => 'required',
+            'year_release' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Check if an image is provided
+        if ($request->hasFile('image')) {
+            try {
+                // Handle file upload if an image is provided
+                $imagePath = $request->file('image')->store('movies/images', 'public');
+                $validatedData['image'] = $imagePath;
+            } catch (\Exception $e) {
+                // Handle any exceptions during file upload
+                return redirect('/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
+            }
+        } else {
+            // If no image is provided, set 'image' to a default value ("default-image-path" in this case)
+            $validatedData['image'] = "default-image-path";
+        }
+
+        // Create a new movie with the validated data
+        Movie::create($validatedData);
+
+        // Redirect to a specific route after adding the movie
+        return redirect('/movies')->with('status', 'Movie added successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -57,6 +91,9 @@ class MovieController extends Controller
     public function edit($id)
     {
         //
+        $movie = Movie::find($id);
+
+        return view('Movie.movie_edit', compact('movie'));
     }
 
     /**
@@ -69,6 +106,23 @@ class MovieController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'director' => 'required',
+            'genre' => 'required',
+            'description' => 'required',
+            'year_release' => 'required',
+        ]);
+
+        // Find the movie by its ID
+        $movie = Movie::findOrFail($id);
+
+        // Update the movie with the validated data
+        $movie->update($validatedData);
+
+        // Redirect back to the movies index page
+        return redirect('/movies')->with('status', 'Movie updated successfully');
     }
 
     /**
@@ -80,5 +134,8 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+        $movie = Movie::findOrFail($id);
+        $movie->delete();
+        return redirect('/movies');
     }
 }
