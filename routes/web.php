@@ -20,3 +20,4 @@ Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 Route::resource('/movies', '\App\Http\Controllers\MovieController');
 Route::resource('/user', '\App\Http\Controllers\UserController');
+//kenneth
