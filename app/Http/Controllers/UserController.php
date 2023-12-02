@@ -27,7 +27,7 @@ class UserController extends Controller
         if ($checkUser && Hash::check($user_password, $checkUser->password)) {
 
             session(['user_id' => $checkUser->id, 'user_name' => $checkUser->first_name]);
-            return redirect()->route('user.dashboard');
+            return redirect()->route('app.index');
         }
 
         $login_response = 'Login failed! ' . (!$checkUser ? 'Email not found.' : 'Incorrect password.');
@@ -37,12 +37,6 @@ class UserController extends Controller
     public function logout()
     {
         session()->forget(['user_id', 'user_name']);
-        $movie_list = Movie::all();
-        return view('User.home', compact('movie_list'));
-    }
-
-    public function dashboard()
-    {
         $movie_list = Movie::all();
         return view('User.home', compact('movie_list'));
     }
