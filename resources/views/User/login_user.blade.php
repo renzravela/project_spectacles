@@ -16,7 +16,6 @@
     <h1>Login</h1>
     <form action="{{ route('user.login') }}" method="POST">
         @csrf
-        @method('POST')
         <label for="login_user_email">Email</label>
         <input type="email" name="email" id="login_user_email" required>
 

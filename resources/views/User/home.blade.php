@@ -22,6 +22,7 @@
             <p>{{ $movie->genre }}</p>
             <p>{{ $movie->description }}</p>
             <p>{{ $movie->year_release }}</p>
+            <a href="">Review</a>
         </div>
     @endforeach
 
