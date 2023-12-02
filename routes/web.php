@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +15,11 @@ use App\Http\Controllers\MovieController;
 |
 */
 
-Route::get('/', [UserController::class, 'dashboard'])->name('user.dashboard'); //index
+Route::get('/', [PageController::class, 'index']);
 Route::post('/user/login', [UserController::class, 'login'])->name('user.login');
 Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 Route::resource('/movies', '\App\Http\Controllers\MovieController');
 Route::resource('/user', '\App\Http\Controllers\UserController');
+Route::resource('/app', '\App\Http\Controllers\PageController');
 //kenneth
