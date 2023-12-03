@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spectacles Movies PH</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -13,22 +14,13 @@
 
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <style>
-        .movie-image {
-    width: 200px;
-    height: 300px
-    margin-left: 1rem;
-    border-radius: 2rem;
-    margin-bottom: 2rem;
-    /* Add any additional styling here */
-}
-    </style>
 </head>
 <body class="bg-dark bg-opacity-50" >
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="#">Spectikol</a>
+            <a class="navbar-brand text-light" href="#">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
+            </a>
 
             <!-- Toggle button for small screens -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,20 +59,18 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container">
         <h1>Movie List</h1>
-
-        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+    
+        <div class="row">
             @foreach ($movie_list as $movie)
-                <div class="col-md-4 mb-4">
-                    <div class="card bg-dark bg-opacity-75 text-light">
-                        <div class="card-body">
-                            <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image" class="movie-image">
-                            <h5 class="card-title">{{ $movie->title }}</h5>
-                            {{-- <p class="card-text">{{ $movie->director }}</p> --}}
-                            <p class="card-text">{{ $movie->genre }} | {{ $movie->year_release }}</p>
-                            {{-- <p class="card-text">{{ $movie->description }}</p> --}}
-                            <a href="{{ route('app.show', $movie->id) }}">Review</a>
+                <div class="col-md-3">
+                    <div class="movie-card">
+                        <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image">
+                        <div class="movie-overlay">
+                            <h5>{{ $movie->title }}</h5>
+                            <p>{{ $movie->genre }} | {{ $movie->year_release }}</p>
+                            <a href="{{ route('app.show', $movie->id) }}" style="color: #ffc107; text-decoration: none;">Review</a>
                         </div>
                     </div>
                 </div>
