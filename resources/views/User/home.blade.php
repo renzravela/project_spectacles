@@ -13,6 +13,17 @@
 
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .movie-image {
+    width: 200px;
+    height: 300px;
+    margin-left: 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    /* Add any additional styling here */
+}
+    </style>
 </head>
 <body class="bg-dark bg-opacity-50" >
     <nav class="navbar navbar-expand-lg bg-dark">
@@ -59,17 +70,16 @@
     <div class="container mt-4">
         <h1>Movie List</h1>
 
-        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             @foreach ($movie_list as $movie)
                 <div class="col-md-4 mb-4">
                     <div class="card bg-dark bg-opacity-75 text-light">
                         <div class="card-body">
-                            <img src="../../images/rush_2013.jpg" class="image" alt="">
+                            <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image" class="movie-image">
                             <h5 class="card-title">{{ $movie->title }}</h5>
-                            <p class="card-text">{{ $movie->director }}</p>
-                            <p class="card-text">{{ $movie->genre }}</p>
-                            <p class="card-text">{{ $movie->description }}</p>
-                            <p class="card-text">{{ $movie->year_release }}</p>
+                            {{-- <p class="card-text">{{ $movie->director }}</p> --}}
+                            <p class="card-text">{{ $movie->genre }} | {{ $movie->year_release }}</p>
+                            {{-- <p class="card-text">{{ $movie->description }}</p> --}}
                             <a href="{{ route('app.show', $movie->id) }}">Review</a>
                         </div>
                     </div>
