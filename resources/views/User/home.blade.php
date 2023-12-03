@@ -17,7 +17,7 @@
     <style>
         .movie-image {
     width: 200px;
-    height: 300px;
+    height: 300px
     margin-left: 1rem;
     border-radius: 2rem;
     margin-bottom: 2rem;
