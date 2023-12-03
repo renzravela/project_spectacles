@@ -11,5 +11,5 @@ class Movie extends Model
 
     protected $table = "movies";
     public $timestamps = false;
-    protected $fillable = ['title', 'director', 'genre', 'description', 'year_release', 'image'];
+    protected $fillable = ['title', 'director', 'genre', 'description', 'year_release', 'image', 'trailer_link'];
 }

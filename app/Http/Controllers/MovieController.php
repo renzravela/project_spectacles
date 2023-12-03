@@ -46,6 +46,7 @@ class MovieController extends Controller
             'description' => 'required',
             'year_release' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'trailer_link' => 'required'
         ]);
 
         // Check if an image is provided
@@ -62,6 +63,8 @@ class MovieController extends Controller
             // If no image is provided, set 'image' to a default value ("default-image-path" in this case)
             $validatedData['image'] = "default-image-path";
         }
+
+        $validatedData['trailer_link'] = preg_replace('/(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)/', 'https://www.youtube.com/embed/', $validatedData['trailer_link']);
 
         // Create a new movie with the validated data
         Movie::create($validatedData);
@@ -113,6 +116,7 @@ class MovieController extends Controller
             'genre' => 'required',
             'description' => 'required',
             'year_release' => 'required',
+            'trailer_link' => 'required'
         ]);
 
         // Find the movie by its ID

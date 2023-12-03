@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Story about Nikki Lauda and James Hunt.',
                 'year_release' => '2013',
                 'image' => '../../resources/images/rush_2013.jpg',
+                'trailer_link' => 'https://www.youtube.com/watch?v=lzNbGH1oZJc',
             ]
         ];
 
