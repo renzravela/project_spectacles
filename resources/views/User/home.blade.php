@@ -13,22 +13,77 @@
 
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <style>
-        .movie-image {
-    width: 200px;
-    height: 300px;
-    margin-left: 1rem;
-    border-radius: 2rem;
-    margin-bottom: 2rem;
-    /* Add any additional styling here */
-}
+        .movie-list-container {
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .movie-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .movie-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .movie-card:hover .movie-overlay {
+            opacity: 1;
+        }
+
+        .movie-overlay h5,
+        .movie-overlay p {
+            margin: 0;
+            color: white;
+        }
+
+        .movie-overlay a {
+            margin-top: 10px;
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        .movie-overlay a:hover {
+            text-decoration: underline;
+        }
+
+        .container h1{
+            margin-top: 20px
+        }
     </style>
 </head>
 <body class="bg-dark bg-opacity-50" >
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="#">Spectikol</a>
+            <a class="navbar-brand text-light" href="#">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
+            </a>
 
             <!-- Toggle button for small screens -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,20 +122,18 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container">
         <h1>Movie List</h1>
-
-        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+    
+        <div class="row">
             @foreach ($movie_list as $movie)
-                <div class="col-md-4 mb-4">
-                    <div class="card bg-dark bg-opacity-75 text-light">
-                        <div class="card-body">
-                            <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image" class="movie-image">
-                            <h5 class="card-title">{{ $movie->title }}</h5>
-                            {{-- <p class="card-text">{{ $movie->director }}</p> --}}
-                            <p class="card-text">{{ $movie->genre }} | {{ $movie->year_release }}</p>
-                            {{-- <p class="card-text">{{ $movie->description }}</p> --}}
-                            <a href="{{ route('app.show', $movie->id) }}">Review</a>
+                <div class="col-md-3">
+                    <div class="movie-card">
+                        <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image">
+                        <div class="movie-overlay">
+                            <h5>{{ $movie->title }}</h5>
+                            <p>{{ $movie->genre }} | {{ $movie->year_release }}</p>
+                            <a href="{{ route('app.show', $movie->id) }}" style="color: #ffc107; text-decoration: none;">Review</a>
                         </div>
                     </div>
                 </div>
