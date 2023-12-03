@@ -14,7 +14,6 @@
 
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
 </head>
 <body class="bg-dark bg-opacity-50" >
     <nav class="navbar navbar-expand-lg bg-dark">
