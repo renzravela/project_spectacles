@@ -45,7 +45,7 @@
                         <a class="nav-link text-light" href="#">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">TV Shows</a>
+                        <a class="nav-link text-light" href="#">About us</a>
                     </li>
                 </ul>
 
@@ -80,6 +80,7 @@
                             {{-- <p class="card-text">{{ $movie->director }}</p> --}}
                             <p class="card-text">{{ $movie->genre }} | {{ $movie->year_release }}</p>
                             {{-- <p class="card-text">{{ $movie->description }}</p> --}}
+                            <a href="{{ route('app.show', $movie->id) }}">Review</a>
                         </div>
                     </div>
                 </div>
