@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>{{ $movie->title }}</h1>
-
+    @if (session('user_id'))
+    <a href="" class="btn btn-outline-light">Review</a>
+    @endif
+    @if (!session('user_id'))
+        <a href="" class="nav-link text-light">Login to review</a>
+    @endif
 </body>
 </html>
