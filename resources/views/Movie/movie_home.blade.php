@@ -18,7 +18,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-    
+
 </head>
 <body>
 
@@ -42,7 +42,7 @@
                     </ul>
                 </div>
             </nav>
-            
+
 
             <!-- Content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
@@ -57,6 +57,7 @@
                             <th scope="col">Genre</th>
                             <th scope="col">Description</th>
                             <th scope="col">Year Release</th>
+                            <th scope="col">Trailer Link</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -76,6 +77,7 @@
                                 <td>{{ $movie->genre }}</td>
                                 <td>{{ $movie->description }}</td>
                                 <td>{{ $movie->year_release }}</td>
+                                <td>{{ $movie->trailer_link }}</td>
                                 <td>
                                     <!-- Replace the anchor tag with a button tag -->
                                     <a href="/movies/{{ $movie->id }}/edit" class="btn btn-warning" style="margin-bottom: 5px;">Update</a>
@@ -83,7 +85,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger delete-button" data-movie-title="{{ $movie->title }}" data-movie-id="{{ $movie->id }}" type="button">Delete</button>
-                                    </form>                                    
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -97,14 +99,14 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Select all elements with class "delete-button"
             var deleteButtons = document.querySelectorAll('.delete-button');
-    
+
             // Attach a click event listener to each delete button
             deleteButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                     // Extract movie title and id from the button's data attributes
                     var movieTitle = button.getAttribute('data-movie-title');
                     var movieId = button.getAttribute('data-movie-id');
-    
+
                     // Show SweetAlert confirmation dialog
                     Swal.fire({
                         title: 'Are you sure?',
@@ -124,7 +126,7 @@
             });
         });
     </script>
-    
+
 
 </body>
 </html>

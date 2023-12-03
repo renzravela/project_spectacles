@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spectacles - Movie Edit</title>
-    
+
     <!-- Bootstrap and custom CSS-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
@@ -56,6 +56,14 @@
             <label for="year_release">Year Release</label>
             <input type="text" class="form-control" name="year_release" id="year_release" placeholder="Year Release" value="{{ old('year_release', $movie->year_release) }}">
             @error('year_release')
+                <small class="text-danger">*required</small>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="trailer_link">Year Release</label>
+            <input type="text" class="form-control" name="trailer_link" id="trailer_link" placeholder="Trailer Link" value="{{ old('trailer_link', $movie->trailer_link) }}">
+            @error('trailer_link')
                 <small class="text-danger">*required</small>
             @enderror
         </div>
