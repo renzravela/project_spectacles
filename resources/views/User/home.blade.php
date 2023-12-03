@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spectacles Movies PH</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -13,76 +14,13 @@
 
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        .movie-list-container {
-            margin-top: 20px;
-            padding: 0 20px;
-        }
-
-        .movie-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .movie-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .movie-overlay {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .movie-card:hover .movie-overlay {
-            opacity: 1;
-        }
-
-        .movie-overlay h5,
-        .movie-overlay p {
-            margin: 0;
-            color: white;
-        }
-
-        .movie-overlay a {
-            margin-top: 10px;
-            color: #ffc107;
-            text-decoration: none;
-        }
-
-        .movie-overlay a:hover {
-            text-decoration: underline;
-        }
-
-        .container h1{
-            margin-top: 20px
-        }
-    </style>
+    
 </head>
 <body class="bg-dark bg-opacity-50" >
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
             <a class="navbar-brand text-light" href="#">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
             </a>
 
             <!-- Toggle button for small screens -->
