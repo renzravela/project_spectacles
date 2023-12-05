@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Spectacles Movies: {{ $movie->title }}</title>
-</head>
-<body>
+@extends('layouts.nav')
+
+@section('title', $movie->title)
+
+@section('content')
+<body class="bg-dark bg-opacity-50">
+
     @if ($movie->image)
         <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image" class="movie-image">
     @else
@@ -22,11 +20,11 @@
     <iframe width="420" height="345" src="{{ $movie->trailer_link }}"></iframe>
 
     <br>
-    @if (session('user_id'))
-        <a href="" class="btn btn-outline-light">Review</a>
-    @endif
-    @if (!session('user_id'))
-        <a href="" class="nav-link text-light">Login to review</a>
-    @endif
+    @auth
+        <a href="" class="">Review</a>
+    @else
+        <a href="" class="">Login to review</a>
+    @endauth
+
 </body>
-</html>
+@endsection

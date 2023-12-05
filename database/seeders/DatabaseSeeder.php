@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
 
         $users = [
             [
-                'first_name' => 'user',
-                'last_name' => 'user',
-                'email' => 'user@example.comn',
-                'password' => 'useruser',
+                'first_name' => 'client',
+                'last_name' => 'client',
+                'email' => 'client@example.com',
+                'user_type' => 'client',
+                'password' => bcrypt('123456'),
             ]
         ];
 
@@ -53,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Story about Nikki Lauda and James Hunt.',
                 'year_release' => '2013',
                 'image' => '../../resources/images/rush_2013.jpg',
-                'trailer_link' => 'https://www.youtube.com/watch?v=lzNbGH1oZJc',
+                'trailer_link' => 'https://www.youtube.com/embed/lzNbGH1oZJc',
             ]
         ];
 
