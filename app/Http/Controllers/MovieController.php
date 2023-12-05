@@ -57,7 +57,7 @@ class MovieController extends Controller
                 $validatedData['image'] = $imagePath;
             } catch (\Exception $e) {
                 // Handle any exceptions during file upload
-                return redirect('/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
+                return redirect('/admin')->with('error', 'Error uploading image: ' . $e->getMessage());
             }
         } else {
             // If no image is provided, set 'image' to a default value ("default-image-path" in this case)
@@ -70,7 +70,7 @@ class MovieController extends Controller
         Movie::create($validatedData);
 
         // Redirect to a specific route after adding the movie
-        return redirect('/movies')->with('status', 'Movie added successfully');
+        return redirect('/admin')->with('status', 'Movie added successfully');
     }
 
 
@@ -126,7 +126,7 @@ class MovieController extends Controller
         $movie->update($validatedData);
 
         // Redirect back to the movies index page
-        return redirect('/movies')->with('status', 'Movie updated successfully');
+        return redirect('/admin')->with('status', 'Movie updated successfully');
     }
 
     /**
@@ -140,6 +140,6 @@ class MovieController extends Controller
         //
         $movie = Movie::findOrFail($id);
         $movie->delete();
-        return redirect('/movies');
+        return redirect('/admin');
     }
 }

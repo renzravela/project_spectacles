@@ -21,6 +21,7 @@ class CreateMoviesTable extends Migration
             $table->string('description');
             $table->integer('year_release');
             $table->binary('image');
+            $table->binary('trailer_link');
             $table->timestamps();
         });
     }

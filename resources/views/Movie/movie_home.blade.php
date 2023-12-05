@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +29,7 @@
         <div class="row">
 
             <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar ">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
                 <div class="sidebar-sticky ">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -47,7 +50,7 @@
             <!-- Content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
                 <h1 class="mt-5">MOVIE SECTION</h1>
-                <a href="/movies/create" class="btn btn-primary mb-3">Add Movie</a>
+                <a href="{{ route('movies.create') }}" class="btn btn-primary mb-3">Add Movie</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -80,7 +83,7 @@
                                 <td>{{ $movie->trailer_link }}</td>
                                 <td>
                                     <!-- Replace the anchor tag with a button tag -->
-                                    <a href="/movies/{{ $movie->id }}/edit" class="btn btn-warning" style="margin-bottom: 5px;">Update</a>
+                                    <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning" style="margin-bottom: 5px;">Update</a>
                                     <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" id="deleteForm{{ $movie->id }}">
                                         @csrf
                                         @method('DELETE')
@@ -130,3 +133,4 @@
 
 </body>
 </html>
+@endsection

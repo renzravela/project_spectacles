@@ -19,7 +19,7 @@
 </head>
 <body class="container mt-5">
     <h1>Add Movie</h1>
-    <form action="/movies" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('movies.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
