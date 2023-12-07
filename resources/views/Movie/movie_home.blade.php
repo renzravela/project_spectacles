@@ -1,53 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin_nav')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Panel - Movies</title>
-
-    <!-- Bootstrap and custom CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-
-</head>
 <body>
-
     <div class="container-fluid">
         <div class="row">
-
-            <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
-                <div class="sidebar-sticky ">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active text-light" href="#">
-                                <i class="bi bi-house-door"></i> Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="#">
-                                <i class="bi bi-film"></i> Movies
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-
-            <!-- Content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
                 <h1 class="mt-5">MOVIE SECTION</h1>
                 <a href="{{ route('movies.create') }}" class="btn btn-primary mb-3">Add Movie</a>
@@ -129,8 +85,5 @@
             });
         });
     </script>
-
-
 </body>
-</html>
 @endsection
