@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -55,34 +56,29 @@
                 </ul>
 
                 <!-- Search form -->
-                <form class="d-flex ms-auto mx-auto"> <!-- Added mx-auto for centering -->
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex ms-auto mx-auto" action="{{ route('search') }}" method="GET"> <!-- Added mx-auto for centering -->
+                    <input class="form-control me-2" type="search" id="movie_search" name="search" required placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-secondary text-light" type="submit">Search</button>
                 </form>
-
-                {{-- @if (session('user_id'))
-                    <span class="navbar-text text-light mr-auto" style="width: 100px">Hello, {{ session('user_name') }}</span>
-                    <a href="{{ route('user.logout') }}" class="btn btn-outline-light">Logout</a>
-                @endif
-                @if (!session('user_id'))
-                    <a href="{{ route('user.index') }}" class="nav-link text-light">Login/Register</a>
-                @endif --}}
+                <div class="search-list">
+                    <ul id="search-list-container">
+                    </ul>
+                </div>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -91,8 +87,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -108,5 +104,61 @@
     </nav>
 </header>
     @yield('content')
+
+    <script>
+        $(document).ready(function () {
+            $('#movie_search').on('keyup', function () {
+                let search_value = $('#movie_search').val();
+
+                if (search_value === "") {
+                    var searchListContainer = $('#search-list-container');
+                    searchListContainer.empty();
+                } else {
+                    fetchAllMovies(search_value);
+                }
+        });
+
+            function fetchAllMovies(data) {
+                var search = data;
+                var movieImageBaseUrl = "{{ asset('storage/') }}";
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ajax/search',
+                    data: {
+                        key: search,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if(response){
+                            var searchMovies = response.all_movies;
+                            var searchListContainer = $('#search-list-container');
+                            searchListContainer.empty();
+                            $.each(searchMovies, function(index, movie) {
+
+                                var movieElement = '<li class="movie_search_item" data-id="' + movie.id + '"> ' +
+                                    '<img src="' + movieImageBaseUrl + '/' + movie.image + '" alt="Image">' +
+                                    '<p>' + movie.title + ' | </p>' +
+                                    '<p>' + movie.year_release + '</p>' +
+                                    '</li>';
+                                searchListContainer.append(movieElement);
+
+                            });
+                        }else{
+                            var searchListContainer = $('#search-list-container');
+                            searchListContainer.empty();
+
+                            var movieElement = '<li>' + response.message + '</li>';
+                            searchListContainer.append(movieElement);
+                        }
+
+                    },
+                    error: function (response) {
+                        console.log(response.message);
+                    }
+                });
+            }
+        });
+    </script>
 </html>
 

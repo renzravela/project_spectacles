@@ -11,5 +11,5 @@ class Review extends Model
 
     protected $table = "reviews";
     public $timestamps = false;
-    protected $fillable = ['user_id', 'user_name', 'movie_id', 'movie_name', 'rating', 'review'];
+    protected $fillable = ['user_id', 'user_name', 'movie_id', 'movie_name', 'review_headline', 'rating', 'review'];
 }

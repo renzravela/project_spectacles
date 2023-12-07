@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\User;
+use App\Models\Review;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -14,9 +17,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
         $movies = Movie::all();
-        return view('Movie.movie_home')->with(compact('movies'));
+
+        return view('Movie.movie_home', compact('movies'));
     }
 
     /**
@@ -57,7 +60,7 @@ class MovieController extends Controller
                 $validatedData['image'] = $imagePath;
             } catch (\Exception $e) {
                 // Handle any exceptions during file upload
-                return redirect('/admin')->with('error', 'Error uploading image: ' . $e->getMessage());
+                return redirect('/admin/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
             }
         } else {
             // If no image is provided, set 'image' to a default value ("default-image-path" in this case)
@@ -70,7 +73,7 @@ class MovieController extends Controller
         Movie::create($validatedData);
 
         // Redirect to a specific route after adding the movie
-        return redirect('/admin')->with('status', 'Movie added successfully');
+        return redirect('/admin/movies')->with('status', 'Movie added successfully');
     }
 
 
@@ -106,9 +109,32 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    //     // Validate the incoming request data
+    //     $validatedData = $request->validate([
+    //         'title' => 'required',
+    //         'director' => 'required',
+    //         'genre' => 'required',
+    //         'description' => 'required',
+    //         'year_release' => 'required',
+    //         'trailer_link' => 'required'
+    //     ]);
+
+    //     // Find the movie by its ID
+    //     $movie = Movie::findOrFail($id);
+
+    //     // Update the movie with the validated data
+    //     $movie->update($validatedData);
+
+    //     // Redirect back to the movies index page
+    //     return redirect('/admin')->with('status', 'Movie updated successfully');
+    // }
+
+
     public function update(Request $request, $id)
     {
-        //
         // Validate the incoming request data
         $validatedData = $request->validate([
             'title' => 'required',
@@ -116,19 +142,35 @@ class MovieController extends Controller
             'genre' => 'required',
             'description' => 'required',
             'year_release' => 'required',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'trailer_link' => 'required'
         ]);
 
         // Find the movie by its ID
         $movie = Movie::findOrFail($id);
 
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($movie->image) {
+                Storage::delete($movie->image);
+            }
+            // Upload the new image
+            try {
+                $imagePath = $request->file('image')->store('movies/images', 'public');
+                $validatedData['image'] = $imagePath;
+            } catch (\Exception $e) {
+                // Handle any exceptions during file upload
+                return redirect('/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
+            }
+        }
+
         // Update the movie with the validated data
         $movie->update($validatedData);
 
         // Redirect back to the movies index page
-        return redirect('/admin')->with('status', 'Movie updated successfully');
+        return redirect('/admin/movies')->with('status', 'Movie updated successfully');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -140,6 +182,6 @@ class MovieController extends Controller
         //
         $movie = Movie::findOrFail($id);
         $movie->delete();
-        return redirect('/admin');
+        return redirect('/admin/movies');
     }
 }
