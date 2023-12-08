@@ -19,10 +19,13 @@
     <!-- Bootstrap and custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
 
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -32,7 +35,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="/">
+            <a class="navbar-brand text-light" href="{{ url('/') }}">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
             </a>
 
@@ -45,10 +48,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/">Home</a>
+                        <a class="nav-link text-light" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Movies</a>
+                        <a class="nav-link text-light" href="{{ url('/') }}">Movies</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#">About us</a>

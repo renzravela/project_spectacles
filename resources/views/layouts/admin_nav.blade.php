@@ -18,6 +18,8 @@
     <!-- Bootstrap and custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
     {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -31,7 +33,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="/">
+            <a class="navbar-brand text-light" href="{{ route('admin.index') }}">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
             </a>
 
@@ -44,10 +46,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ route('admin.index') }}">Dashboard</a>
+                        <a class="nav-link text-light" href="{{ route('admin.index') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ route('movies.index') }}">Movies</a>
+                        <a class="nav-link text-light" href="{{ route('movies.index') }}"><i class="bi bi-camera-reels"></i> Movies</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{ route('admin.users') }}">Users</a>

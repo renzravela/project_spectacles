@@ -4,82 +4,226 @@
 
 @section('content')
 <body class="bg-dark bg-opacity-50">
+    <div class="container mx-auto mt-4 text-dark"> <!-- Added mx-auto class for centering -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        @if ($movie->image)
+                        <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image"
+                            class="img-fluid rounded movie-image shadow">
+                        @else
+                        <p>No image available</p>
+                        @endif
+                    </div>
+                    <div class="col-md-9">
+                        <iframe class="embed-responsive-item shadow" src="{{ $movie->trailer_link }}" allowfullscreen
+                            style="width:100%; height: 450px;"></iframe>
+                    </div>
+                </div>
 
-    @if ($movie->image)
-        <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image" class="movie-image">
-    @else
-        <p>No image available</p>
-    @endif
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{{ $movie->title }}</h1>
+                        <p><strong>Director:</strong> {{ $movie->director }}</p>
+                        <p><strong>Genre:</strong> {{ $movie->genre }}</p>
+                        <p><strong>Description:</strong> {{ $movie->description }}</p>
+                        <p><strong>Year:</strong> {{ $movie->year_release }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="movie_info_container">
-        <h1>{{ $movie->title }}</h1>
-        <p>Director: {{ $movie->director }}</p>
-        <p>Genre: {{ $movie->genre }}</p>
-        <p>Description {{ $movie->description }}</p>
-        <p>Average Rating: <span class="text-warning">&#9733;</span> {{ $averageRating }}/5</p>
-        <p>Year: {{ $movie->year_release }}</p>
-        <iframe width="420" height="345" src="{{ $movie->trailer_link }}"></iframe>
-    </div>
-    <div class="user_add_review_container">
         @auth
-            <a href="" class="">Review</a>
-            <form action="{{ route('home.add_review', [Auth::user()->id, $movie->id]) }}" method="POST" class="w-50">
-                @csrf
-                <label for="star1">Ratings: </label>
-                <div id="rating_input" class="rating">
-                    <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                    <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                    <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                    <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                    <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
-                </div>
-                <br>
-                <label for="review_headline">Review Headline</label>
-                <br>
-                <input type="text" name="review_headline" id="review_headline" required placeholder="Write a headline for your review here" value="{{ old('review_headline') }}">
-                @error('review_headline')
-                    <small class="text-danger">A required field is missing.</small>
-                @enderror
-                <br>
-                <label for="review">Your Review</label>
-                <br>
-                <textarea name="review" id="review" cols="50" rows="10" placeholder="Write your review here">{{ old('review') }}</textarea>
-                @error('review')
-                    <small class="text-danger">A required field is missing.</small>
-                @enderror
-                <br>
-                <button type="submit">Submit</button>
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="">Login to review</a>
-        @endauth
-    </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#reviewModal">
+                        <i class="bi bi-plus"></i>Add Review
+                    </button>
+                    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="reviewModalLabel">Write a Review</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('home.add_review', [Auth::user()->id, $movie->id]) }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="rating">Ratings:</label>
+                                            <div class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                            </div>
+                                        </div>
 
-    @if (session('status'))
-    <span>{{session('status')}}</span>
-    @endif
-    <div class="user_reviews w-50">
-        <h3>User reviews :<span>{{ count($userReviews) }}</span></h3>
-        @if (count($userReviews) > 0)
-            @foreach ($userReviews as $reviews)
-                @if ($reviews->user_id === Auth::user()->id)
-                <div class="review_container border">
-                    <p>By: {{ $reviews->user_name }} <a href="">Edit</a></p>
-                    <p><b>{{ $reviews->review_headline }}</b> <span class="text-warning">&#9733;</span> <span>{{ $reviews->rating }}/5</span></p>
-                    <p>{{ $reviews->review }}</p>
+                                        <div class="form-group">
+                                            <label for="review_headline">Review Headline</label>
+                                            <input type="text" name="review_headline" id="review_headline"
+                                                class="form-control" required
+                                                placeholder="Write a headline for your review here"
+                                                value="{{ old('review_headline') }}">
+                                            @error('review_headline')
+                                                <small class="text-danger">A required field is missing.</small>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="review">Your Review</label>
+                                            <textarea name="review" id="review" class="form-control" rows="5"
+                                                placeholder="Write your review here">{{ old('review') }}</textarea>
+                                            @error('review')
+                                                <small class="text-danger">A required field is missing.</small>
+                                            @enderror
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                @else
-                <div class="review_container border">
-                    <p>By: {{ $reviews->user_name }}</p>
-                    <p><b>{{ $reviews->review_headline }}</b> <span class="text-warning">&#9733;</span> <span>{{ $reviews->rating }}/5</span></p>
-                    <p>{{ $reviews->review }}</p>
-                </div>
-                @endif
-            @endforeach
+            </div>
         @else
-            <p>No Reviews.</p>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <a href="{{ route('login') }}" class="btn btn-primary">Login to review</a>
+                </div>
+            </div>
+        @endauth
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>User reviews <span>{{ count($userReviews) }}</span></h3>
+                @if (count($userReviews) > 0)
+                    @foreach ($userReviews as $reviews)
+                        <div class="card mb-3" style="width: 50rem;">
+                            <div class="card-body shadow">
+                                <h5 class="card-title">{{ $reviews->review_headline }}</h5>
+                                <p class="card-text">{{ $reviews->review }}</p>
+                                <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No Reviews.</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</body>
+@endsection
+
+
+{{-- 
+@extends('layouts.nav')
+
+@section('title', $movie->title)
+
+@section('content')
+<body>
+    <div class="container mt-4 text-dark">
+        <div class="row">
+            <div class="col-md-3">
+                @if ($movie->image)
+                    <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image" class="img-fluid rounded movie-image">
+                @else
+                    <p>No image available</p>
+                @endif
+            </div>
+
+            <div class="col-md-9">
+                <h1 class="fw-bolder">{{ $movie->title }}</h1>
+                <p >Director:{{ $movie->director }}</p>
+                <p >Genre: {{ $movie->genre }}</p>
+                <p>Description: {{ $movie->description }}</p>
+                <p>Year: {{ $movie->year_release }}</p>
+
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ $movie->trailer_link }}" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        @auth
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <a href="#" class="btn btn-primary mb-3">Write a Review</a>
+                    <form action="{{ route('home.add_review', [Auth::user()->id, $movie->id]) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="rating">Ratings:</label>
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="review_headline">Review Headline</label>
+                            <input type="text" name="review_headline" id="review_headline" class="form-control" required placeholder="Write a headline for your review here" value="{{ old('review_headline') }}">
+                            @error('review_headline')
+                                <small class="text-danger">A required field is missing.</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="review">Your Review</label>
+                            <textarea name="review" id="review" class="form-control" rows="5" placeholder="Write your review here">{{ old('review') }}</textarea>
+                            @error('review')
+                                <small class="text-danger">A required field is missing.</small>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        @else
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <a href="#" class="btn btn-primary">Login to review</a>
+                </div>
+            </div>
+        @endauth
+
+        @if (session('status'))
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <span>{{ session('status') }}</span>
+                </div>
+            </div>
         @endif
 
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>User reviews <span>{{ count($userReviews) }}</span></h3>
+                @if (count($userReviews) > 0)
+                    @foreach ($userReviews as $reviews)
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $reviews->review_headline }}</h5>
+                                <p class="card-text">{{ $reviews->review }}</p>
+                                <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No Reviews.</p>
+                @endif
+            </div>
+        </div>
     </div>
 
     <script>
@@ -96,4 +240,4 @@
         });
     </script>
 </body>
-@endsection
+@endsection --}}
