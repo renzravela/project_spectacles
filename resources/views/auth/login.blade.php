@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header" style="align-self: center;">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div class="card-body" >
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -53,12 +53,12 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link text-light" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
@@ -70,4 +70,21 @@
         </div>
     </div>
 </div>
+
+<style>
+    .card {
+        /* margin-top: 100px;  */
+        width: 30rem; 
+        /* margin: 0%; */
+        margin-left: 25%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin-top: 100px;
+        background-color: rgba(108, 108, 108, 0.9); 
+        align-self: center;
+        color: #ffffff;
+    }
+
+</style>
 @endsection
