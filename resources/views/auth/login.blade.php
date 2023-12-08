@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-1">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
@@ -64,6 +64,18 @@
                                 @endif
                             </div>
                         </div>
+
+                        {{-- <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <a class="btn btn-link" href="">
+                                    {{ __('Login with Facebook') }}
+                                </a>
+
+                                <a class="btn btn-link" href="">
+                                    {{ __('Login with Google') }}
+                                </a>
+                            </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>

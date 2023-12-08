@@ -32,7 +32,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="#">
+            <a class="navbar-brand text-light" href="/">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
             </a>
 
@@ -45,7 +45,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Home</a>
+                        <a class="nav-link text-light" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#">Movies</a>
@@ -56,14 +56,17 @@
                 </ul>
 
                 <!-- Search form -->
-                <form class="d-flex ms-auto mx-auto" action="{{ route('search') }}" method="GET"> <!-- Added mx-auto for centering -->
-                    <input class="form-control me-2" type="search" id="movie_search" name="search" required placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-secondary text-light" type="submit">Search</button>
-                </form>
-                <div class="search-list">
-                    <ul id="search-list-container">
-                    </ul>
+                <div class="search-container">
+                    <form class="d-flex ms-auto mx-auto" action="{{ route('search') }}" method="GET"> <!-- Added mx-auto for centering -->
+                        <input class="form-control me-2" type="search" id="movie_search" name="search" required placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary text-light" type="submit">Search</button>
+                    </form>
+                    <div class="search-list">
+                        <ul id="search-list-container">
+                        </ul>
+                    </div>
                 </div>
+
 
                     <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
@@ -136,11 +139,13 @@
                             searchListContainer.empty();
                             $.each(searchMovies, function(index, movie) {
 
-                                var movieElement = '<li class="movie_search_item" data-id="' + movie.id + '"> ' +
+                                var movieElement = '<li class="movie_search_item"> <a href="{{ route("home.show", ":id") }}">' +
                                     '<img src="' + movieImageBaseUrl + '/' + movie.image + '" alt="Image">' +
                                     '<p>' + movie.title + ' | </p>' +
                                     '<p>' + movie.year_release + '</p>' +
-                                    '</li>';
+                                    '</a></li>';
+
+                                movieElement = movieElement.replace(":id", movie.id);
                                 searchListContainer.append(movieElement);
 
                             });

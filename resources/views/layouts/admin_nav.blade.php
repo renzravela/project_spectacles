@@ -31,7 +31,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="#">
+            <a class="navbar-brand text-light" href="/">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
             </a>
 
@@ -48,6 +48,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{ route('movies.index') }}">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ route('admin.users') }}">Users</a>
                     </li>
                 </ul>
 

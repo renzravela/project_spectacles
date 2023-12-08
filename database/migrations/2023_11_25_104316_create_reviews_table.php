@@ -21,7 +21,7 @@ class CreateReviewsTable extends Migration
             $table->string('movie_name');
             $table->string('review_headline');
             $table->integer('rating');
-            $table->string('review');
+            $table->text('review');
             $table->timestamps();
         });
     }

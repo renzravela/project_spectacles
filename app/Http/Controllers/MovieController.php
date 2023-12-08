@@ -15,11 +15,40 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $movies = Movie::all();
+    // public function index()
+    // {
+    //     $movies = Movie::all();
 
-        return view('Movie.movie_home', compact('movies'));
+    //     return view('Movie.movie_home', compact('movies'));
+    // }
+
+    public function index(Request $request)
+    {
+        // Get all movies
+        $movies = Movie::query();
+
+        // Check if a genre filter is provided
+        $genreFilter = $request->input('genre');
+        $yearReleaseFilter = $request->input('year_release');
+
+
+        // If a genre filter is provided, filter movies by genre
+        if ($genreFilter) {
+            $movies->where('genre', $genreFilter);
+        }
+
+        if ($yearReleaseFilter) {
+            $movies->where('year_release', $yearReleaseFilter);
+        }
+
+        // Retrieve the filtered movies
+        $movies = $movies->get();
+
+        return view('Movie.movie_home', [
+            'movies' => $movies,
+            'selectedGenre' => $genreFilter,
+            'selectedYearRelease' => $yearReleaseFilter, // Add this line
+        ]);
     }
 
     /**
@@ -183,5 +212,12 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
         $movie->delete();
         return redirect('/admin/movies');
+    }
+
+    public function getUsers()
+    {
+        $users = User::all();
+
+        return view('Movie.movie_users', compact('users'));
     }
 }
