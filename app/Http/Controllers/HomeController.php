@@ -44,8 +44,10 @@ class HomeController extends Controller
     {
         //
         $userReviews = Review::where('movie_id', $id)->get();
+        $averageRating = round(Review::where('movie_id', $id)
+            ->avg('rating'));
         $movie = Movie::findOrFail($id);
-        return view('User.view_movie', compact('movie', 'userReviews'));
+        return view('User.view_movie', compact('movie', 'userReviews', 'averageRating'));
     }
 
     public function add_movie_review($userId, $movieId, Request $request)
@@ -69,15 +71,20 @@ class HomeController extends Controller
 
         $validatedData = array_merge(['user_id' => $userId, 'user_name' => $user_name, 'movie_id' => $movieId, 'movie_name' => $movie->title], $validatedData);
 
-        Review::create($validatedData);
-        return redirect("/home/$movieId")->with('status', 'Review Added!');
+        $checkUserIfExist = Review::where('user_id', $userId)->where('movie_id', $movieId)->first();
+
+        if ($checkUserIfExist) {
+            return redirect("/home/$movieId")->with('status', 'You already submitted a review for this movie.');
+        } else {
+            Review::create($validatedData);
+            return redirect("/home/$movieId")->with('status', 'Review Added!');
+        }
     }
 
     public function search(Request $request)
     {
         $searchTerm = $request->query('search');
 
-        // Perform the search based on the title, for example
         $searchResults = Movie::where('title', 'like', "%{$searchTerm}%")->get();
 
         return view('User.view_search_movie', compact('searchResults', 'searchTerm'));
@@ -87,7 +94,6 @@ class HomeController extends Controller
     {
         $search = $request->input('key');
 
-        // Perform a search in the database based on title or director
         $movies = Movie::where('title', 'like', '%' . $search . '%')
             ->orWhere('director', 'like', '%' . $search . '%')
             ->get();
