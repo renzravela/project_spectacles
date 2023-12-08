@@ -16,7 +16,6 @@
                         <p>No image available</p>
                         @endif
                     </div>
-
                     <div class="col-md-9">
                         <iframe class="embed-responsive-item shadow" src="{{ $movie->trailer_link }}" allowfullscreen
                             style="width:100%; height: 450px;"></iframe>
@@ -236,7 +235,6 @@
                     const selectedValue = input.value;
                     console.log('Selected rating:', selectedValue);
                     rating_hidden.value = selectedValue;
-                    // You can send the selected value to the server using an AJAX request if needed.
                 });
             });
         });

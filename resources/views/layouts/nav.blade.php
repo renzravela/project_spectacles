@@ -59,14 +59,17 @@
                 </ul>
 
                 <!-- Search form -->
-                <form class="d-flex ms-auto mx-auto" action="{{ route('search') }}" method="GET"> <!-- Added mx-auto for centering -->
-                    <input class="form-control me-2" type="search" id="movie_search" name="search" required placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-secondary text-light" type="submit">Search</button>
-                </form>
-                <div class="search-list">
-                    <ul id="search-list-container">
-                    </ul>
+                <div class="search-container">
+                    <form class="d-flex ms-auto mx-auto" action="{{ route('search') }}" method="GET"> <!-- Added mx-auto for centering -->
+                        <input class="form-control me-2" type="search" id="movie_search" name="search" required placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary text-light" type="submit">Search</button>
+                    </form>
+                    <div class="search-list">
+                        <ul id="search-list-container">
+                        </ul>
+                    </div>
                 </div>
+
 
                     <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
@@ -139,11 +142,13 @@
                             searchListContainer.empty();
                             $.each(searchMovies, function(index, movie) {
 
-                                var movieElement = '<li class="movie_search_item" data-id="' + movie.id + '"> ' +
+                                var movieElement = '<li class="movie_search_item"> <a href="{{ route("home.show", ":id") }}">' +
                                     '<img src="' + movieImageBaseUrl + '/' + movie.image + '" alt="Image">' +
                                     '<p>' + movie.title + ' | </p>' +
                                     '<p>' + movie.year_release + '</p>' +
-                                    '</li>';
+                                    '</a></li>';
+
+                                movieElement = movieElement.replace(":id", movie.id);
                                 searchListContainer.append(movieElement);
 
                             });

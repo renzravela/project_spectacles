@@ -51,6 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{ route('movies.index') }}"><i class="bi bi-camera-reels"></i> Movies</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ route('admin.users') }}">Users</a>
+                    </li>
                 </ul>
 
                     <!-- Right Side Of Navbar -->
