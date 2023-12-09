@@ -90,7 +90,7 @@
 
 @extends('layouts.admin_nav')
 
-<style>
+{{-- <style>
     .movie-image-container {
         border: 1px solid #ccc;
         padding: 5px;
@@ -103,7 +103,7 @@
         display: block;
         margin: auto;
     }
-</style>
+</style> --}}
 
 @section('content')
     @php
@@ -113,14 +113,14 @@
     <div class="container-fluid">
         <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
-                <h1 class="mt-5">MOVIE SECTION</h1>
-                <a href="{{ route('movies.create') }}" class="btn btn-primary mb-3">Add Movie</a>
+                <h1 class="mt-3"><i class="bi bi-film"></i> MOVIE SECTION</h1>
+                <a href="{{ route('movies.create') }}" class="btn btn-primary mb-3"><i class="bi bi-file-earmark-plus-fill"></i> Add Movie</a>
 
                 <!-- Filter Form -->
             <form action="{{ route('movies.index') }}" method="GET">
                 <div class="row mb-3">
                     <div class="col-md-3">
-                        <label for="genre">Filter by Genre:</label>
+                        <label for="genre"><i class="bi bi-funnel-fill"></i> Filter by Genre:</label>
                         <select class="form-control" id="genre" name="genre">
                             <option value="" {{ request('genre') === '' ? 'selected' : '' }}>All Genres</option>
                             <option value="Action" {{ request('genre') === 'Action' ? 'selected' : '' }}>Action</option>
@@ -138,15 +138,12 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label for="year_release">Filter by Release Year:</label>
+                        <label for="year_release"><i class="bi bi-funnel-fill"></i> Filter by Release Year:</label>
                         <input type="number" class="form-control" id="year_release" name="year_release" value="{{ request('year_release') }}" min="1900" max="{{ date('Y') }}">
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary mt-4">Apply Filters</button>
-                    </div>
-                    <!-- Add a "Clear Filters" button -->
-                    <div class="col-md-3">
-                        <a href="{{ route('movies.index') }}" class="btn btn-secondary mt-4">Clear Filters</a>
+                        <button type="submit" class="btn btn-primary mt-4"><i class="bi bi-sort-down"></i> Apply Filters</button>
+                        <a href="{{ route('movies.index') }}" class="btn btn-secondary mt-4" onclick="clearFilters()"><i class="bi bi-x-circle"></i> Clear Filters</a>
                     </div>
                 </div>
             </form>
@@ -206,11 +203,11 @@
                                 <td>{{ $movie->trailer_link }}</td>
                                 <td>
                                     <!-- Replace the anchor tag with a button tag -->
-                                    <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning" style="margin-bottom: 5px;">Update</a>
+                                    <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning" style="margin-bottom: 5px;"><i class="bi bi-pencil-square"></i> Update</a>
                                     <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" id="deleteForm{{ $movie->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger delete-button" data-movie-title="{{ $movie->title }}" data-movie-id="{{ $movie->id }}" type="button">Delete</button>
+                                        <button class="btn btn-danger delete-button" data-movie-title="{{ $movie->title }}" data-movie-id="{{ $movie->id }}" type="button"><i class="bi bi-trash"></i> Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -251,6 +248,11 @@
                 });
             });
         });
+    </script>
+    <script>
+        function clearFilters() {
+            document.getElementById('year_release').value = '';
+        }
     </script>
 </body>
 @endsection
