@@ -7,11 +7,12 @@
 @endphp
 <body>
     <div class="container-fluid">
+        <div class="row justify-content-center">
         <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
-                <h1 class="mt-5">USERS SECTION</h1>
+                <h1 class="mt-2"><i class="bi bi-people"></i> USERS SECTION</h1>
                 <br>
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -48,6 +49,7 @@
                 </table>
             </main>
         </div>
+    </div>
     </div>
 
     <script>
