@@ -115,6 +115,36 @@ class HomeController extends Controller
         }
     }
 
+    public function edit_movie_review($userId, $movieId, Request $request)
+    {
+        $user = User::findOrFail($userId);
+        $user_name = $user->first_name . ' ' . $user->last_name;
+        $movie = Movie::findOrFail($movieId);
+
+        $validatedData = $request->validate([
+            'rating' => 'required|numeric',
+            'review_headline' => 'required',
+            'review' => 'required'
+        ]);
+
+        $validatedData = array_merge([
+            'user_id' => $userId,
+            'user_name' => $user_name,
+            'movie_id' => $movieId,
+            'movie_name' => $movie->title
+        ], $validatedData);
+
+        // Find the existing review or create a new one
+        $review = Review::updateOrCreate(
+            ['user_id' => $userId, 'movie_id' => $movieId],
+            $validatedData
+        );
+
+        // Optionally, you can return a response or redirect after updating the review
+        return redirect("/home/$movieId")
+            ->with('status', 'Review updated successfully');
+    }
+
     public function search(Request $request)
     {
         $searchTerm = $request->query('search');

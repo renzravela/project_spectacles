@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -24,6 +26,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home/all', [HomeController::class, 'getAllMovies'])->name('home.all');
 Route::get('/home/about', [HomeController::class, 'showAbout'])->name('home.about');
 Route::post('/home/{userId}/add/{movieId}', [HomeController::class, 'add_movie_review'])->name('home.add_review');
+Route::post('/home/{userId}/edit/{movieId}', [HomeController::class, 'edit_movie_review'])->name('home.edit_review');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::post('/ajax/search', [HomeController::class, 'searchMovies'])->name('searchMovies');
 Route::resource('/home', '\App\Http\Controllers\HomeController');
@@ -39,6 +42,12 @@ Route::middleware(['auth', 'userAuth:client'])->group(function () {
     // Regular user routes here
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 });
+
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+
+Route::get('facebook/login', [FacebookController::class, 'provider'])->name('facebook.login');
+Route::get('facebook/callback', [FacebookController::class, 'handleCallback'])->name('facebook.callback');
 
 // // Authentication Routes...
 // Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
