@@ -18,7 +18,7 @@
                             <a href="{{ route('home.show', $movie->id) }}" style="color: #ffffff; text-decoration: none;">Review</a>
                         </div>
                     </div>
-                </div>  
+                </div>
             @endforeach
         </div>
     </div>

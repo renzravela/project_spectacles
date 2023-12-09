@@ -138,29 +138,6 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    //     // Validate the incoming request data
-    //     $validatedData = $request->validate([
-    //         'title' => 'required',
-    //         'director' => 'required',
-    //         'genre' => 'required',
-    //         'description' => 'required',
-    //         'year_release' => 'required',
-    //         'trailer_link' => 'required'
-    //     ]);
-
-    //     // Find the movie by its ID
-    //     $movie = Movie::findOrFail($id);
-
-    //     // Update the movie with the validated data
-    //     $movie->update($validatedData);
-
-    //     // Redirect back to the movies index page
-    //     return redirect('/admin')->with('status', 'Movie updated successfully');
-    // }
-
 
     public function update(Request $request, $id)
     {
@@ -190,7 +167,7 @@ class MovieController extends Controller
                 $validatedData['image'] = $imagePath;
             } catch (\Exception $e) {
                 // Handle any exceptions during file upload
-                return redirect('/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
+                return redirect('adm/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
             }
         }
 

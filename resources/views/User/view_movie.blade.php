@@ -24,7 +24,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>{{ $movie->title }}</h1>
+                        <h1>{{ $movie->title }} <span class="text-warning">&#9733;{{ $averageRating }}/5</span></h1>
                         <p><strong>Director:</strong> {{ $movie->director }}</p>
                         <p><strong>Genre:</strong> {{ $movie->genre }}</p>
                         <p><strong>Description:</strong> {{ $movie->description }}</p>
@@ -100,18 +100,46 @@
             </div>
         @endauth
 
+        @if (session('status'))
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <span>{{ session('status') }}</span>
+            </div>
+        </div>
+        @endif
+
         <div class="row mt-4">
             <div class="col-md-12">
-                <h3>User reviews <span>{{ count($userReviews) }}</span></h3>
+                <h3>User reviews: <span>{{ count($userReviews) }}</span></h3>
                 @if (count($userReviews) > 0)
                     @foreach ($userReviews as $reviews)
-                        <div class="card mb-3" style="width: 50rem;">
-                            <div class="card-body shadow">
-                                <h5 class="card-title">{{ $reviews->review_headline }}</h5>
-                                <p class="card-text">{{ $reviews->review }}</p>
-                                <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                        @auth
+                            @if($reviews->user_id === Auth::user()->id)
+                                <div class="card mb-3" style="width: 50rem;">
+                                    <div class="card-body shadow">
+                                        <h5 class="card-title">{{ $reviews->review_headline }} <span><a href="">Edit</a></span></h5>
+                                        <p class="card-text">{{ $reviews->review }}</p>
+                                        <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="card mb-3" style="width: 50rem;">
+                                    <div class="card-body shadow">
+                                        <h5 class="card-title">{{ $reviews->review_headline }}</h5>
+                                        <p class="card-text">{{ $reviews->review }}</p>
+                                        <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                                    </div>
+                                </div>
+                            @endif
+                        @else
+                            <div class="card mb-3" style="width: 50rem;">
+                                <div class="card-body shadow">
+                                    <h5 class="card-title">{{ $reviews->review_headline }}</h5>
+                                    <p class="card-text">{{ $reviews->review }}</p>
+                                    <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                                </div>
                             </div>
-                        </div>
+                        @endauth
                     @endforeach
                 @else
                     <p>No Reviews.</p>
@@ -123,7 +151,7 @@
 @endsection
 
 
-{{-- 
+{{--
 @extends('layouts.nav')
 
 @section('title', $movie->title)
