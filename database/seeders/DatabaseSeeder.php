@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Admin;
 use App\Models\Movie;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +23,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => 'client',
                 'email' => 'client@example.com',
                 'user_type' => 'client',
-                'password' => bcrypt('123456'),
+                'password' => bcrypt('clientclient'),
             ]
         ];
 
@@ -32,18 +31,19 @@ class DatabaseSeeder extends Seeder
             User::create($user);
         }
 
-        // $admins = [
-        //     [
-        //         'first_name' => 'admin',
-        //         'last_name' => 'admin',
-        //         'email' => 'admin@example.com',
-        //         'password' => 'adminadmin',
-        //     ]
-        // ];
+        $admins = [
+            [
+                'first_name' => 'admin',
+                'last_name' => 'admin',
+                'email' => 'admin@example.com',
+                'user_type' => 'admin',
+                'password' => bcrypt('adminadmin'),
+            ]
+        ];
 
-        // foreach ($admins as $key => $admin) {
-        //     Admin::create($admin);
-        // }
+        foreach ($admins as $key => $admin) {
+            User::create($admin);
+        }
 
 
         $movies = [

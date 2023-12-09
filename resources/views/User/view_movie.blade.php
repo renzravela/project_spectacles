@@ -4,7 +4,7 @@
 
 @section('content')
 <body class="bg-dark bg-opacity-50">
-    <div class="container mx-auto mt-4 text-dark"> <!-- Added mx-auto class for centering -->
+    <div class="container mx-auto mt-4 text-dark">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -92,6 +92,58 @@
                     </div>
                 </div>
             </div>
+
+            {{-- edit review --}}
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="modal fade" id="edit_reviewModal" tabindex="-1" role="dialog" aria-labelledby="edit_reviewModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="edit_reviewModalLabel">Edit Review</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('home.edit_review', [Auth::user()->id, $movie->id]) }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="rating">Ratings:</label>
+                                            <div class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="edit_review_headline">Review Headline</label>
+                                            <input type="text" name="review_headline" id="edit_review_headline" class="form-control" required placeholder="Write a headline for your review here" value="">
+                                            @error('review_headline')
+                                                <small class="text-danger">A required field is missing.</small>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="edit_review">Your Review</label>
+                                            <textarea name="review" id="edit_review" class="form-control" rows="5" placeholder="Write your review here"></textarea>
+                                            @error('review')
+                                                <small class="text-danger">A required field is missing.</small>
+                                            @enderror
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @else
             <div class="row mt-3">
                 <div class="col-md-12">
@@ -117,26 +169,33 @@
                             @if($reviews->user_id === Auth::user()->id)
                                 <div class="card mb-3" style="width: 50rem;">
                                     <div class="card-body shadow">
-                                        <h5 class="card-title">{{ $reviews->review_headline }} <span><a href="">Edit</a></span></h5>
+                                        <h5 class="card-title"><strong>{{ $reviews->review_headline }}</strong>
+                                            <span>
+                                                <button type="button" id="edit_review_btn" class="btn btn-warning mb-3" data-toggle="modal" data-target="#edit_reviewModal"
+                                                data-rating="{{ $reviews->rating }}"
+                                                data-headline="{{ $reviews->review_headline }}"
+                                                data-review="{{ $reviews->review }}">
+                                                <i class="bi bi-pencil"></i>
+                                            </button></span></h5>
                                         <p class="card-text">{{ $reviews->review }}</p>
-                                        <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                                        <p class="card-text"><span class="text-primary">{{ $reviews->user_name }}</span> <strong>Rating:</strong> {{ $reviews->rating }}/5</p>
                                     </div>
                                 </div>
                             @else
                                 <div class="card mb-3" style="width: 50rem;">
                                     <div class="card-body shadow">
-                                        <h5 class="card-title">{{ $reviews->review_headline }}</h5>
+                                        <h5 class="card-title"><strong>{{ $reviews->review_headline }}</strong></h5>
                                         <p class="card-text">{{ $reviews->review }}</p>
-                                        <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                                        <p class="card-text"><span class="text-primary">{{ $reviews->user_name }}</span> <strong>Rating:</strong> {{ $reviews->rating }}/5</p>
                                     </div>
                                 </div>
                             @endif
                         @else
                             <div class="card mb-3" style="width: 50rem;">
                                 <div class="card-body shadow">
-                                    <h5 class="card-title">{{ $reviews->review_headline }}</h5>
+                                    <h5 class="card-title"><strong>{{ $reviews->review_headline }}</strong></h5>
                                     <p class="card-text">{{ $reviews->review }}</p>
-                                    <p class="card-text"><strong>Rating:</strong> {{ $reviews->rating }}/5</p>
+                                    <p class="card-text"><span class="text-primary">{{ $reviews->user_name }}</span> <strong>Rating:</strong> {{ $reviews->rating }}/5</p>
                                 </div>
                             </div>
                         @endauth
@@ -147,6 +206,21 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+
+            $('#edit_review_btn').on('click',function () {
+
+                var rating = $(this).data('rating');
+                var headline = $(this).data('headline');
+                var review = $(this).data('review');
+
+                $('input[name="rating"]').filter('[value="' + rating + '"]').prop('checked', true);
+                $('#edit_review_headline').val(headline);
+                $('#edit_review').val(review);
+            });
+        });
+    </script>
 </body>
 @include('layouts.footer')
 @endsection

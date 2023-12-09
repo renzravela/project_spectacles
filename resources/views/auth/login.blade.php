@@ -65,17 +65,17 @@
                             </div>
                         </div>
 
-                        {{-- <div class="row mb-0">
+                        <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <a class="btn btn-link" href="">
-                                    {{ __('Login with Facebook') }}
-                                </a>
-
-                                <a class="btn btn-link" href="">
+                                <a class="btn btn-link" href="{{ route('google-auth') }}">
                                     {{ __('Login with Google') }}
                                 </a>
+
+                                <a class="btn btn-link" href="{{ route('facebook.login') }}">
+                                    {{ __('Login with Facebook') }}
+                                </a>
                             </div>
-                        </div> --}}
+                        </div>
                     </form>
                 </div>
             </div>
@@ -86,14 +86,14 @@
 <style>
     .card {
         /* margin-top: 100px;  */
-        width: 30rem; 
+        width: 30rem;
         /* margin: 0%; */
         margin-left: 25%;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 10px;
         margin-top: 100px;
-        background-color: rgba(108, 108, 108, 0.9); 
+        background-color: rgba(108, 108, 108, 0.9);
         align-self: center;
         color: #ffffff;
     }
