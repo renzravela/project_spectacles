@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="genre">Genre</label>
                         <select class="form-control" name="genre" id="genre">
-                            <option value="{{ $movie->genre }}" disabled>{{ old('genre', $movie->genre) }}</option>
+                            <option value="{{ $movie->genre }}" selected>{{ old('genre', $movie->genre) }}</option>
                             <option value="Action" {{ old('genre') === 'Action' ? 'selected' : '' }}>Action</option>
                             <option value="Comedy" {{ old('genre') === 'Comedy' ? 'selected' : '' }}>Comedy</option>
                             <option value="Drama" {{ old('genre') === 'Drama' ? 'selected' : '' }}>Drama</option>

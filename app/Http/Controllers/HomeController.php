@@ -30,10 +30,33 @@ class HomeController extends Controller
         return view('User.home', compact('movie_list'));
     }
 
-    public function getAllMovies()
+    public function getAllMovies(Request $request)
     {
-        $movie_list = Movie::all();
-        return view('User.home_all_movies', compact('movie_list'));
+        $movie_list = Movie::query();
+
+        // Check if a genre filter is provided
+        $genreFilter = $request->input('genre');
+        $yearReleaseFilter = $request->input('year_release');
+
+        // If a genre filter is provided, filter movies by genre
+        if ($genreFilter) {
+            $movie_list->where('genre', $genreFilter);
+        }
+
+        if ($yearReleaseFilter) {
+            $movie_list->where('year_release', $yearReleaseFilter);
+        }
+
+        $movie_list = $movie_list->get();
+
+        // return view('User.home', compact('movie_list'));
+
+        return view('User.home_all_movies', [
+            'movie_list' => $movie_list,
+            'selectedGenre' => $genreFilter,
+            'selectedYearRelease' => $yearReleaseFilter, // Add this line
+        ]);
+        // return view('User.home_all_movies', compact('movie_list'));
     }
 
     public function showAbout()
