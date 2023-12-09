@@ -77,7 +77,6 @@
     </div>
 </body>
 @endsection --}}
-
 @extends('layouts.admin_nav')
 
 @section('content')

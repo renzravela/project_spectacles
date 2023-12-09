@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var updateButton = document.getElementById('updateButton');

@@ -183,7 +183,6 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-
                     <!-- Table Body -->
                     <tbody>
                         @foreach ($movies as $movie)

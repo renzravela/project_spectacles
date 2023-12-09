@@ -57,7 +57,6 @@
                         <a class="nav-link text-light" href="#">About us</a>
                     </li>
                 </ul>
-
                 <!-- Search form -->
                 <div class="search-container">
                     <form class="d-flex ms-auto mx-auto" action="{{ route('search') }}" method="GET"> <!-- Added mx-auto for centering -->

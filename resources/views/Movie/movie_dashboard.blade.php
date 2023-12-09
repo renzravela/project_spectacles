@@ -9,7 +9,7 @@
                     <h1 class="display-4"><i class="bi bi-person-circle"></i> Hello, {{ Auth::user()->first_name }}!</h1>
                     <p class="lead">Welcome to your admin dashboard.</p>
                 </div>
-
+                
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card text-white bg-secondary bg-gradient mb-3" style="max-width: 18rem;">

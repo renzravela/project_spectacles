@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Select all elements with class "delete-button"

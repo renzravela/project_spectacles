@@ -83,7 +83,6 @@
                                                 <small class="text-danger">A required field is missing.</small>
                                             @enderror
                                         </div>
-
                                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                                     </form>
                                 </div>
