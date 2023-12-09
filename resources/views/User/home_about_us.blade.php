@@ -58,4 +58,6 @@
         }
     </style>
 </body>
+@include('layouts.footer')
 @endsection
+
