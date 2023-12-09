@@ -29,7 +29,7 @@ Route::post('/ajax/search', [HomeController::class, 'searchMovies'])->name('sear
 Route::resource('/home', '\App\Http\Controllers\HomeController');
 
 Route::middleware(['auth', 'userAuth:admin'])->group(function () {
-    // Admin routes here
+    // Admin routes here.;/'
     Route::get('/admin', [HomeController::class, 'adminAuth'])->name('admin.index');
     Route::resource('/admin/movies', '\App\Http\Controllers\MovieController');
     Route::get('/admin/users', [MovieController::class, 'getUsers'])->name('admin.users');
