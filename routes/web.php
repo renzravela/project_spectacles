@@ -21,10 +21,12 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index']);
-Route::resource('/home', '\App\Http\Controllers\HomeController');
+Route::get('/home/all', [HomeController::class, 'getAllMovies'])->name('home.all');
+Route::get('/home/about', [HomeController::class, 'showAbout'])->name('home.about');
 Route::post('/home/{userId}/add/{movieId}', [HomeController::class, 'add_movie_review'])->name('home.add_review');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::post('/ajax/search', [HomeController::class, 'searchMovies'])->name('searchMovies');
+Route::resource('/home', '\App\Http\Controllers\HomeController');
 
 Route::middleware(['auth', 'userAuth:admin'])->group(function () {
     // Admin routes here

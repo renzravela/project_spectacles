@@ -74,7 +74,9 @@
                     <button type="button" class="btn btn-primary" id="updateButton"><i class="bi bi-pencil"></i> Update</button>
                 </form>
             </div>
-        </div>
+            <br>
+            <button type="button" class="btn btn-primary" id="updateButton">Update</button>
+        </form>
     </div>
     
     <script>

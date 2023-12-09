@@ -33,7 +33,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand text-light" href="{{ route('admin.index') }}">
+            <a class="navbar-brand text-light" href="/">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="max-height: 40px; margin-right: 10px;">
             </a>
             <!-- Toggle button for small screens -->
