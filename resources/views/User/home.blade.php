@@ -6,7 +6,7 @@
 
 <body class="bg-dark bg-opacity-50">
     <div class="container">
-        <h1>Movie List</h1>
+        <h1>New Movies</h1>
         <div class="row">
             @foreach ($movie_list as $movie)
                 <div class="col">

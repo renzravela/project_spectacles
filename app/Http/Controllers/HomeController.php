@@ -26,8 +26,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $movie_list = Movie::all();
+        $movie_list = Movie::orderBy('year_release', 'desc')->limit(10)->get();
         return view('User.home', compact('movie_list'));
+    }
+
+    public function getAllMovies()
+    {
+        $movie_list = Movie::all();
+        return view('User.home_all_movies', compact('movie_list'));
+    }
+
+    public function showAbout()
+    {
+        return view('User.home_about_us');
     }
 
     public function adminAuth()
