@@ -7,46 +7,48 @@
 @endphp
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
-                <h1 class="mt-5">USERS SECTION</h1>
-                <br>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Firstname</th>
-                            <th scope="col">Lastname</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Date Created</th>
-                            {{-- <th scope="col">Action</th> --}}
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($users as $user)
+        <div class="row justify-content-center">
+            <div class="row">
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
+                    <h1 class="mt-5"><i class="bi bi-people-fill"></i> USERS SECTION</h1>
+                    <br>
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ $cnt++ }}</td>
-                                <td>{{ $user->user_type }}</td>
-                                <td>{{ $user->first_name }}</td>
-                                <td>{{ $user->last_name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                {{-- <td>
-                                    <!-- Replace the anchor tag with a button tag -->
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning" style="margin-bottom: 5px;">Update</a>
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" id="deleteForm{{ $user->id }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger delete-button" data-user-first_name="{{ $user->first_name }}" data-user-id="{{ $user->id }}" type="button">Delete</button>
-                                    </form>
-                                </td> --}}
+                                <th scope="col">#</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Firstname</th>
+                                <th scope="col">Lastname</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Date Created</th>
+                                {{-- <th scope="col">Action</th> --}}
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </main>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $cnt++ }}</td>
+                                    <td>{{ $user->user_type }}</td>
+                                    <td>{{ $user->first_name }}</td>
+                                    <td>{{ $user->last_name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->created_at }}</td>
+                                    {{-- <td>
+                                        <!-- Replace the anchor tag with a button tag -->
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning" style="margin-bottom: 5px;">Update</a>
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" id="deleteForm{{ $user->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger delete-button" data-user-first_name="{{ $user->first_name }}" data-user-id="{{ $user->id }}" type="button">Delete</button>
+                                        </form>
+                                    </td> --}}
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </main>
+            </div>
         </div>
     </div>
 

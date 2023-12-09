@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h1>Edit Movie</h1>
-                <form action="{{ route('movies.update', $movie->id)}}" method="post" id="updateForm" enctype="multipart/form-data">
+                <form action="{{ route('movies.update', $movie->id)}}" method="post" id="updateForm"  enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -26,33 +26,29 @@
                     <div class="form-group">
                         <label for="genre">Genre</label>
                         <select class="form-control" name="genre" id="genre">
-                            <option value="{{ $movie->genre }}" selected>{{ old('genre', $movie->genre) }}</option>
+                            <option value="{{ $movie->genre }}" disabledz>{{ old('genre', $movie->genre) }}</option>
                             <option value="Action" {{ old('genre') === 'Action' ? 'selected' : '' }}>Action</option>
                             <option value="Comedy" {{ old('genre') === 'Comedy' ? 'selected' : '' }}>Comedy</option>
-                            <!-- Add more genre options as needed -->
+                            <option value="Drama" {{ old('genre') === 'Drama' ? 'selected' : '' }}>Drama</option>
+                            <option value="Adventure" {{ old('genre') === 'Adventure' ? 'selected' : '' }}>Adventure</option>
+                            <option value="Horror" {{ old('genre') === 'Horror' ? 'selected' : '' }}>Horror</option>
+                            <option value="Thriller" {{ old('genre') === 'Thriller' ? 'selected' : '' }}>Thriller</option>
+                            <option value="Sci-Fi" {{ old('genre') === 'Sci-Fi' ? 'selected' : '' }}>Sci-Fi</option>
+                            <option value="Fantasy" {{ old('genre') === 'Fantasy' ? 'selected' : '' }}>Fantasy</option>
+                            <option value="Reality" {{ old('genre') === 'Reality' ? 'selected' : '' }}>Reality</option>
+                            <option value="K-Drama" {{ old('genre') === 'K-Drama' ? 'selected' : '' }}>K-Drama</option>
                         </select>
                         @error('genre')
                             <small class="text-danger">*required</small>
                         @enderror
                     </div>
-                    <!-- Add other form fields as needed -->
-
                     <div class="form-group">
-                        <label for="trailer_link">Trailer Link</label>
-                        <input type="text" class="form-control" name="trailer_link" id="trailer_link" placeholder="Trailer Link" value="{{ old('trailer_link', $movie->trailer_link) }}">
-                        @error('trailer_link')
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" name="description" id="description" placeholder="Description" value="{{ old('description', $movie->description) }}">
+                        @error('description')
                             <small class="text-danger">*required</small>
                         @enderror
                     </div>
-
-                    <div class="form-group">
-                        <label for="image">Choose Image</label>
-                        <input type="file" class="form-control-file" name="image" id="image" placeholder="Movie Image" value="{{ old('image', $movie->image) }}">
-                        @error('image')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
                     <div class="form-group">
                         <label for="year_release">Year Release</label>
                         <input type="text" class="form-control" name="year_release" id="year_release" placeholder="Year Release" value="{{ old('year_release', $movie->year_release) }}">
@@ -60,10 +56,22 @@
                             <small class="text-danger">*required</small>
                         @enderror
                     </div>
-
-                    <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-primary mt-3" id="updateButton"><i class="bi bi-pencil"></i> Update</button>
+                    <div class="form-group">
+                        <label for="image">Choose Image</label>
+                        <input type="file" class="form-control-file" name="image" id="image" placeholder="Movie Image" value="{{ old('image', $movie->image) }}">
+                        @error('image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="trailer_link">Trailer Link</label>
+                        <input type="text" class="form-control" name="trailer_link" id="trailer_link" placeholder="Trailer Link" value="{{ old('trailer_link', $movie->trailer_link) }}">
+                        @error('trailer_link')
+                            <small class="text-danger">*required</small>
+                        @enderror
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-primary" id="updateButton"><i class="bi bi-pencil"></i> Update</button>
                 </form>
             </div>
         </div>

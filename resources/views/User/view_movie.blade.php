@@ -11,7 +11,7 @@
                     <div class="col-md-3">
                         @if ($movie->image)
                         <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image"
-                            class="img-fluid rounded movie-image shadow">
+                            class="img-fluid rounded movie-image shadow" style="width:100%; height: 450px;">
                         @else
                         <p>No image available</p>
                         @endif

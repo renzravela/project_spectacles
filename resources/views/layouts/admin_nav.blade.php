@@ -52,7 +52,7 @@
                         <a class="nav-link text-light" href="{{ route('movies.index') }}"><i class="bi bi-camera-reels"></i> Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ route('admin.users') }}">Users</a>
+                        <a class="nav-link text-light" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Users</a>
                     </li>
                 </ul>
 
@@ -74,7 +74,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->first_name }}
+                                    <i class="bi bi-person-circle" style="margin-right: 5px;"></i> {{ Auth::user()->first_name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
