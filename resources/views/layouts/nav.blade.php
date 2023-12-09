@@ -29,7 +29,7 @@
     {{-- Sweet Alerts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>@yield('title', 'Spectacles Movies')</title>
+    <title>@yield('title', 'Spectacles Movies PH')</title>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg bg-dark">
