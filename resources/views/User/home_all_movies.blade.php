@@ -69,4 +69,5 @@
         </div>
     </div>
 </body>
+@include('layouts.footer')
 @endsection

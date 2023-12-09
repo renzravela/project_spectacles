@@ -159,6 +159,14 @@ li {
     cursor: pointer;
 }
 
-li.active {
-    color: #FFD700; /* Change this to the desired color when the item is clicked */
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.footer p,
+.footer a {
+    flex: 1;
+    /* margin-right: 10px; */
+    margin: 2px;
 }

@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
 <body class="bg-dark bg-opacity-50">
     <div class="container">
         <h1 style="text-align: center; font-size: 3em; font-weight: bold; color: #333;">Movie List</h1>
@@ -24,4 +26,5 @@
         </div>
     </div>
 </body>
+@include('layouts.footer')
 @endsection
