@@ -7,6 +7,7 @@
 <body class="bg-dark bg-opacity-50">
     <div class="container">
         <h1 style="text-align: center; font-size: 3em; font-weight: bold; color: #333;">Movie List</h1>
+
         <div class="row">
             @foreach ($movie_list as $movie)
                 <div class="col-sm-2">
@@ -18,7 +19,7 @@
                             <a href="{{ route('home.show', $movie->id) }}" style="color: #ffffff; text-decoration: none;">Review</a>
                         </div>
                     </div>
-                </div>  
+                </div>
             @endforeach
         </div>
     </div>
