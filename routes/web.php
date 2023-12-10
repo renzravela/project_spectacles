@@ -41,6 +41,7 @@ Route::middleware(['auth', 'userAuth:admin'])->group(function () {
 Route::middleware(['auth', 'userAuth:client'])->group(function () {
     // Regular user routes here
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+    Route::delete('/home/{reviewId}/delete/{movieId}', [HomeController::class, 'destroy'])->name('home.delete_review');
 });
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');

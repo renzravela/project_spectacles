@@ -93,6 +93,7 @@
                 </div>
             </div>
 
+
             {{-- edit review --}}
             <div class="row mt-3">
                 <div class="col-md-12">
@@ -120,6 +121,11 @@
                                             </div>
                                         </div>
 
+                                        {{-- <div class="form-group">
+                                            <label for="rating">Rating:</label>
+                                                <input type="number" id="rating" name="rating" min="1" max="5" step="1" placeholder="Enter a number between 1 and 5" required>
+                                        </div> --}}
+
                                         <div class="form-group">
                                             <label for="edit_review_headline">Review Headline</label>
                                             <input type="text" name="review_headline" id="edit_review_headline" class="form-control" required placeholder="Write a headline for your review here" value="">
@@ -143,6 +149,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {{-- delete review --}}
+            <div>
+
             </div>
         @else
             <div class="row mt-3">
@@ -176,7 +187,19 @@
                                                 data-headline="{{ $reviews->review_headline }}"
                                                 data-review="{{ $reviews->review }}">
                                                 <i class="bi bi-pencil"></i>
-                                            </button></span></h5>
+                                            </button>
+                                            @if (Auth::check() && $reviews->user_id === Auth::user()->id)
+                                            <form id="deleteForm" action="{{ route('home.delete_review', ['reviewId' => $reviews->id, 'movieId' => $movie->id]) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-danger mb-3" onclick="confirmDelete()"><i class="bi bi-trash3"></i></button>
+                                            </form>
+                                            {{-- <form id="deleteForm" action="{{ route('home.delete_review', [$reviews->id, $movie->id]) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="confirmDelete()"><i class="bi bi-trash3"></i></button>
+                                            </form> --}}
+                                        @endif</span></h5>
                                         <p class="card-text">{{ $reviews->review }}</p>
                                         <p class="card-text"><span class="text-primary">{{ $reviews->user_name }}</span> <strong>Rating:</strong> {{ $reviews->rating }}/5</p>
                                     </div>
@@ -211,6 +234,16 @@
 
             $('#edit_review_btn').on('click',function () {
 
+                // Function to log the selected rating
+        function logSelectedRating() {
+            var selectedRating = $('input[name="rating"]:checked').val();
+            console.log('Selected rating:', selectedRating);
+        }
+
+        // Attach the log function to the change event of the radio buttons
+        $('input[name="rating"]').on('change', logSelectedRating);
+
+
                 var rating = $(this).data('rating');
                 var headline = $(this).data('headline');
                 var review = $(this).data('review');
@@ -218,8 +251,28 @@
                 $('input[name="rating"]').filter('[value="' + rating + '"]').prop('checked', true);
                 $('#edit_review_headline').val(headline);
                 $('#edit_review').val(review);
+
+                logSelectedRating();
             });
         });
+    </script>
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form when user confirms
+                    document.getElementById('deleteForm').submit();
+                }
+            });
+        }
     </script>
 </body>
 @include('layouts.footer')
