@@ -166,7 +166,7 @@
         @if (session('status'))
         <div class="row mt-3">
             <div class="col-md-12">
-                <span>{{ session('status') }}</span>
+                <span class="alert alert-success">{{ session('status') }}</span>
             </div>
         </div>
         @endif

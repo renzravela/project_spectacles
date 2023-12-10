@@ -147,7 +147,7 @@ class HomeController extends Controller
 
         // Optionally, you can return a response or redirect after updating the review
         return redirect("/home/$movieId")
-            ->with('status', 'Review updated successfully');
+            ->with('status', 'Review updated successfully!');
     }
 
     public function search(Request $request)
@@ -184,6 +184,6 @@ class HomeController extends Controller
         //
         $review = Review::findOrFail($id);
         $review->delete();
-        return redirect("/home/$movieId");
+        return redirect("/home/$movieId")->with('status', 'Review deleted.');
     }
 }
