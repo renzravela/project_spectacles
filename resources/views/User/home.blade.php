@@ -60,11 +60,11 @@
                 <span class="visually-hidden">Next</span>
             </a>
         </div>
-        
+
         <div class="row">
             <h1>Most Viewed</h1>
             @foreach ($movie_list as $movie)
-                <div class="col-sm-2">
+                <div class="col">
                     <div class="movie-card">
                         <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image">
                         <div class="movie-overlay">
