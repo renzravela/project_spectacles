@@ -27,6 +27,7 @@ Route::get('/home/all', [HomeController::class, 'getAllMovies'])->name('home.all
 Route::get('/home/about', [HomeController::class, 'showAbout'])->name('home.about');
 Route::post('/home/{userId}/add/{movieId}', [HomeController::class, 'add_movie_review'])->name('home.add_review');
 Route::post('/home/{userId}/edit/{movieId}', [HomeController::class, 'edit_movie_review'])->name('home.edit_review');
+Route::delete('/home/{reviewId}/delete/{movieId}', [HomeController::class, 'destroy'])->name('home.delete_review');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::post('/ajax/search', [HomeController::class, 'searchMovies'])->name('searchMovies');
 Route::resource('/home', '\App\Http\Controllers\HomeController');
@@ -41,7 +42,6 @@ Route::middleware(['auth', 'userAuth:admin'])->group(function () {
 Route::middleware(['auth', 'userAuth:client'])->group(function () {
     // Regular user routes here
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-    Route::delete('/home/{reviewId}/delete/{movieId}', [HomeController::class, 'destroy'])->name('home.delete_review');
 });
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');

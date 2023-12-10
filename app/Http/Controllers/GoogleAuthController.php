@@ -40,7 +40,7 @@ class GoogleAuthController extends Controller
                 return redirect()->intended('home');
             }
         } catch (Throwable $th) {
-            dd('Something is wrong!' . $th->getMessage());
+            return redirect()->route('login');
         }
     }
 }
