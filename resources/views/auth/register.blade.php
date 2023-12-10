@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header" style="text-align: center;">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -77,15 +77,16 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <div class="row mb-0">
+                    <div class="row mb-0 mt-3">
                         <div class="col-md-8 offset-md-4">
-                            <a class="btn btn-light" href="{{ route('google-auth') }}">
+                            <span>or Register using</span>
+                            <a class="btn mb-2 text-light" href="{{ route('google-auth') }}" style="background-color: #b74141">
                                 <i class="bi bi-google"></i>
                                 {{ __('Continue with Google') }}
                             </a>
@@ -108,7 +109,7 @@
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 10px;
-        margin-top: 100px;
+        margin-top: 50px;
         background-color: rgba(108, 108, 108, 0.9);
         align-self: center;
         color: #ffffff;

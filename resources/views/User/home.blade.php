@@ -7,7 +7,7 @@
 
 
 <body class="bg-dark bg-opacity-50">
-    <div class="container">
+    <div class="container" style="margin-bottom: 200px;">
         <h1 style="text-align: center; font-size: 3em; font-weight: bold; color: #333;">Movie List</h1>
 
         <div class="row">

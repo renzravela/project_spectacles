@@ -2,7 +2,7 @@
 
 @section('content')
 <body class="bg-dark bg-opacity-50">
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-5" style="margin-bottom: 100px;">
         <section class="text-center mb-5">
             <h1 class="mb-4">About Us</h1>
             <div class="about-us container" style="">

@@ -2,7 +2,7 @@
 
 @section('content')
 <body class="bg-dark bg-opacity-50">
-    <div class="container">
+    <div class="container" style="margin-bottom: 200px;">
         <h1 style="text-align: center; font-size: 3em; font-weight: bold; color: #333;">All Movies</h1>
 
         <!-- Filter Form -->
@@ -39,7 +39,7 @@
 
             <!-- Display Message if No Movies -->
             @if (count($movie_list) === 0)
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-info" role="alert" style="margin-bottom: 200px;">
                 @if (request('genre') && request('year_release'))
                     No movies found with genre <span style="font-weight: bold;">{{ request('genre') }}</span> in year <span style="font-weight: bold;">{{ request('year_release') }}.</span>
                 @elseif (request('genre'))

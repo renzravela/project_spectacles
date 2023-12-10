@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="align-self: center;">{{ __('Login') }}</div>
+                <div class="card-header" style="text-align: center;">{{ __('Login') }}</div>
 
                 <div class="card-body" >
                     <form method="POST" action="{{ route('login') }}">
@@ -65,9 +65,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <a class="btn btn-light" href="{{ route('google-auth') }}">
+                        <div class="row mb-0 mt-3">
+                            <div class="col-md-8 offset-md-4 ">
+                                <span>or Login using</span>
+                                <a class="btn mb-2 text-light" href="{{ route('google-auth') }}" style="background-color: #b74141">
                                     <i class="bi bi-google"></i>
                                     {{ __('Continue with Google') }}
                                 </a>
