@@ -67,12 +67,13 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <a class="btn btn-link" href="{{ route('google-auth') }}">
-                                    {{ __('Login with Google') }}
+                                <a class="btn btn-light" href="{{ route('google-auth') }}">
+                                    <i class="bi bi-google"></i>
+                                    {{ __('Continue with Google') }}
                                 </a>
-
-                                <a class="btn btn-link" href="{{ route('facebook.login') }}">
-                                    {{ __('Login with Facebook') }}
+                                <a class="btn btn-primary" href="{{ route('facebook.login') }}">
+                                    <i class="bi bi-facebook"></i>
+                                    {{ __('Continue with Facebook') }}
                                 </a>
                             </div>
                         </div>

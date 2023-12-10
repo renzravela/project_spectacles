@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
+use Validator;
+use Exception;
+
 
 class FacebookController extends Controller
 {
@@ -16,18 +19,21 @@ class FacebookController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function handelCallback()
+    public function handleCallback()
     {
         try {
-            $fb_user = Socialite::driver('google')->user();
-            $user = User::where('email', $fb_user->getEmail())->first();
+            $fb_user = Socialite::driver('facebook')->stateless()->user();
+            $user = User::where('fb-id', $fb_user->id)->first();
 
-            if (!$user) {
+            // dd($user, $fb_user);
+
+            if ($user === null) {
                 $new_user = User::create([
                     'user_type' => 'client',
-                    'first_name' => $fb_user->user['given_name'],
-                    'last_name' => $fb_user->user['family_name'],
-                    'email' => $fb_user->getEmail(),
+                    'first_name' => $fb_user->name,
+                    'last_name' => $fb_user->name,
+                    'email' => $fb_user->email,
+                    'fb-id' => $fb_user->id,
                 ]);
 
                 Auth::login($new_user);

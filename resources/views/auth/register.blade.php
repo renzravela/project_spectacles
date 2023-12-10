@@ -83,6 +83,18 @@
                             </div>
                         </div>
                     </form>
+                    <div class="row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <a class="btn btn-light" href="{{ route('google-auth') }}">
+                                <i class="bi bi-google"></i>
+                                {{ __('Continue with Google') }}
+                            </a>
+                            <a class="btn btn-primary" href="{{ route('facebook.login') }}">
+                                <i class="bi bi-facebook"></i>
+                                {{ __('Continue with Facebook') }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,14 +102,14 @@
 </div>
 <style>
     .card {
-        margin-top: 100px; 
-        width: 30rem; 
+        margin-top: 100px;
+        width: 30rem;
         margin-left: 25%;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 10px;
         margin-top: 100px;
-        background-color: rgba(108, 108, 108, 0.9); 
+        background-color: rgba(108, 108, 108, 0.9);
         align-self: center;
         color: #ffffff;
     }
