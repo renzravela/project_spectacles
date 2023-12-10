@@ -167,7 +167,7 @@ class MovieController extends Controller
                 $validatedData['image'] = $imagePath;
             } catch (\Exception $e) {
                 // Handle any exceptions during file upload
-                return redirect('adm/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
+                return redirect('admin/movies')->with('error', 'Error uploading image: ' . $e->getMessage());
             }
         }
 
