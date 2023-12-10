@@ -6,6 +6,8 @@ use App\Models\Movie;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon; // Add this line at the top for date manipulation
+
 
 class HomeController extends Controller
 {
@@ -26,8 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $movie_list = Movie::orderBy('year_release', 'desc')->limit(10)->get();
-        return view('User.home', compact('movie_list'));
+        // Get the latest release movies
+        $latest_movies = Movie::orderBy('year_release', 'desc')->limit(3)->get();
+
+        $movie_list = Movie::orderBy('title', 'asc')->limit(10)->get();
+        return view('User.home', compact('latest_movies', 'movie_list'));
     }
 
     public function getAllMovies(Request $request)
