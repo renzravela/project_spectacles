@@ -46,6 +46,7 @@
             border-radius: 100px;
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
         }
         .developer-profile{
             margin: 20px;
