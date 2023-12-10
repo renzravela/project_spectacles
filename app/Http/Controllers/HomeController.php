@@ -127,9 +127,9 @@ class HomeController extends Controller
         $movie = Movie::findOrFail($movieId);
 
         $validatedData = $request->validate([
-            'rating' => 'required|numeric',
             'review_headline' => 'required',
-            'review' => 'required'
+            'review' => 'required',
+            'rating' => 'required|numeric'
         ]);
 
         $validatedData = array_merge([
@@ -172,5 +172,18 @@ class HomeController extends Controller
         }
 
         return response()->json(['success' => true, 'all_movies' => $movies]);
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id, $movieId)
+    {
+        //
+        $review = Review::findOrFail($id);
+        $review->delete();
+        return redirect("/home/$movieId");
     }
 }
