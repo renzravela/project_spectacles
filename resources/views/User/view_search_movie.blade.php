@@ -4,7 +4,7 @@
 
 @section('content')
 <body class="bg-dark bg-opacity-50">
-    <div class="container">
+    <div class="container" style="margin-bottom: 200px;">
         <h2>Search Results for "{{ $searchTerm }}"</h2>
 
         @if ($searchResults->isEmpty())
