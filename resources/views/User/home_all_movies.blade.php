@@ -55,7 +55,7 @@
 
         <div class="row">
             @foreach ($movie_list as $movie)
-                <div class="col-sm-2">
+                <div class="col">
                     <div class="movie-card">
                         <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }} Image">
                         <div class="movie-overlay">

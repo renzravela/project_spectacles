@@ -187,6 +187,9 @@ class MovieController extends Controller
     {
         //
         $movie = Movie::findOrFail($id);
+
+        $movie->reviews()->delete();
+
         $movie->delete();
         return redirect('/admin/movies');
     }

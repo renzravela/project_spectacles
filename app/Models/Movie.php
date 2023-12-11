@@ -12,4 +12,9 @@ class Movie extends Model
     protected $table = "movies";
     public $timestamps = false;
     protected $fillable = ['title', 'director', 'genre', 'description', 'year_release', 'image', 'trailer_link'];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
