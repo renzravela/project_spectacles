@@ -128,12 +128,21 @@ body {
     z-index: 1;
 }
 
+.search-list ul {
+    display: block;
+    padding: 0;
+}
+
 .movie_search_item{
     width: 100%;
-    border: 1px solid white;
+    border-bottom: 1px solid #333;
+    padding: 10px;
     background-color: hsla(0, 0%, 0%, 0.5);
     list-style: none;
     color: #fff;
+}
+.movie_search_item:hover{
+    background-color: hsla(0, 0%, 0%, 1);
 }
 
 .movie_search_item a{
